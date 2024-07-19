@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 for part in (1, 2):
     result = 0
     with open("input/09.txt", "r") as f:
