@@ -1,5 +1,6 @@
 <?php
 
+
 class ThreeBest {
   public $first;
   public $second;
@@ -62,8 +63,10 @@ class Solution {
   }
 }
 
+
 $solution = new Solution(fopen("input/01.txt", "r"));
 $solution->solve();
+
 print("Part 1: " . $solution->part1() . "\n");
 print("Part 2: " . $solution->part2() . "\n");
 
