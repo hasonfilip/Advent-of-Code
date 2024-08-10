@@ -1,6 +1,27 @@
 <?php
 
 
+class Interval {
+  public $start;
+  public $end;
+
+  public function __construct($rawInterval) {
+    $intervals = explode('-', $rawInterval);
+    $this->start = $intervals[0];
+    $this->end = $intervals[1];
+  }
+
+  public function overlaps(Interval $interval) {
+    return ($this->start <= $interval->end && $this->end >= $interval->start);
+  }
+
+  public function contains(Interval $interval) {
+    return ($this->start <= $interval->start && $this->end >= $interval->end);
+  }
+}
+
+
+
 class Solution {
   private $file;
 
@@ -8,39 +29,20 @@ class Solution {
     $this->file = $file;
   }
 
-  private function resetFilePointer() {
-    fseek($this->file, 0);
-  }
-
-  public function part1() {
-    $this->resetFilePointer();
-    $result = 0;
+  public function solve() {
+    $result1 = 0;
+    $result2 = 0;
     while (($line = fgets($this->file)) !== false) {
       $intervals = explode(',', $line);
-      $firstInterval = explode('-', $intervals[0]);
-      $secondInterval = explode('-', $intervals[1]);
-      if(($firstInterval[0] <= $secondInterval[0] && $firstInterval[1] >= $secondInterval[1]) ||
-        ($firstInterval[0] >= $secondInterval[0] && $firstInterval[1] <= $secondInterval[1])) {
-        $result++;
-      }
+      $firstInterval = new Interval($intervals[0]);
+      $secondInterval = new Interval($intervals[1]);
+      if($firstInterval->contains($secondInterval) || $secondInterval->contains($firstInterval))
+        $result1++; 
+      if($firstInterval->overlaps($secondInterval))
+        $result2++;
     }
-    return $result;
-  }
-
-  public function part2() {
-    $this->resetFilePointer();
-    $result = 0;
-    while (($line = fgets($this->file)) !== false) {
-      $intervals = explode(',', $line);
-      $firstInterval = explode('-', $intervals[0]);
-      $secondInterval = explode('-', $intervals[1]);
-      if($firstInterval[0] <= $secondInterval[1] && $firstInterval[1] >= $secondInterval[0] ||
-        $firstInterval[1] <= $secondInterval[0] && $firstInterval[0] >= $secondInterval[1]) {
-        $result++;
-      }
-    }
-
-    return $result;
+    print("Part 1: " . $result1 . "\n");
+    print("Part 2: " . $result2 . "\n");
   }
 
   public function __destruct() {
@@ -48,8 +50,5 @@ class Solution {
   }
 }
 
-
 $solution = new Solution(fopen('input/04.txt', 'r'));
-
-print("Part 1: " . $solution->part1() . "\n");
-print("Part 2: " . $solution->part2() . "\n");
+$solution->solve();
