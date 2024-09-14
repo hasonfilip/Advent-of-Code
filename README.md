@@ -2,6 +2,9 @@
 
 This repository contains my solutions to the [Advent of Code](https://adventofcode.com/about) challenges. The challenges are released daily in December leading up to Christmas.
 
+## 2021
+Solutions for year 2021 can be found in the [2021](2021) directory. For this year I've decided to use AWK.
+
 ## 2022
 Solutions for year 2022 can be found in the [2022](2022) directory. For this year I've decided to use PHP.
 
