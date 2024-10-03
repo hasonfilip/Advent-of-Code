@@ -1,28 +1,16 @@
-NR == 1 {
-  n = split($1, a, "")
-  for (i = 1; i <= n; i++) {
-    number_of_bits[i] = 0
-  }
-}
+BEGIN { FS = "" }
 
-{
-  split($1, a, "")
-  for (bit in a) {
-    if (a[bit] == 1) {
-      number_of_bits[bit]++
-    }
-  }
-}
+{ for (i = 1; i <= NF; i++) number_of_bits[i] += $i }
 
 END {
   gamma = 0
   epsilon = 0
   for (i in number_of_bits) {
     if (number_of_bits[i] > NR / 2) {
-      gamma += 2 ^ (n - i)
+      gamma += 2 ^ (NF - i)
     }
     else {
-      epsilon += 2 ^ (n - i)
+      epsilon += 2 ^ (NF - i)
     }
   }
   print (gamma * epsilon)
