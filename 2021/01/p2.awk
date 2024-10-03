@@ -1,14 +1,6 @@
-BEGIN { 
-  windows[0] = 0; 
-  windows[1] = 0; 
-  windows[2] = 0; 
-  result = 0 
-}
+#!/usr/bin/awk -f
 
-NR <= 3 { 
-  for (i = 0; i < NR; i++) windows[i] += $1; 
-  next 
-}
+NR <= 3 { for (i = 0; i < NR; i++) windows[i] += $1; }
 
 NR > 3 {
   windows[NR % 3] += $1;
