@@ -3,15 +3,15 @@
 BEGIN { FS = "" }
 
 { 
-	for (i = 1; i <= NF; i++) {
-		O_rating[NR][i] = $i
-		CO_rating[NR][i] = $i
-		}
-	}
+  for (i = 1; i <= NF; i++) {
+    O_rating[NR][i] = $i
+    CO_rating[NR][i] = $i
+    }
+  }
 
 END {
-	O_rating_sz = NR 
-	CO_rating_sz = NR
+  O_rating_sz = NR 
+  CO_rating_sz = NR
 
   for (bit = 1; bit <= NF; bit++) {
     O_bits = 0
@@ -42,21 +42,21 @@ END {
         CO_rating_sz--
         }
       }
-		}
+    }
 
-	for (record in O_rating) {
-		for (bit in O_rating[record]) {
-			O += O_rating[record][bit] * (2 ^ (NF - bit))
-			} 
-		}
+  for (record in O_rating) {
+    for (bit in O_rating[record]) {
+      O += O_rating[record][bit] * (2 ^ (NF - bit))
+      } 
+    }
 
-	for (record in CO_rating) {
-		for (bit in CO_rating[record]) {
-			CO += CO_rating[record][bit] * (2 ^ (NF - bit))
-			} 
-		}
+  for (record in CO_rating) {
+    for (bit in CO_rating[record]) {
+      CO += CO_rating[record][bit] * (2 ^ (NF - bit))
+      } 
+    }
 
-  print O * CO
+    print O * CO
 
-	}
+  }
 
