@@ -57,6 +57,4 @@ END {
     }
 
     print O * CO
-
   }
-
