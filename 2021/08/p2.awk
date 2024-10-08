@@ -58,7 +58,6 @@ function contains(array, element,    i) {
     }
   }
 
-
   for (d in digits[6]) {
     split(digits[6][d], segments[6][d], "")
     is_nine = 1
@@ -133,29 +132,27 @@ function contains(array, element,    i) {
     case 4:
       result += 4 * (10 ** (NF - i))
       break
+    case 5:
+      if (contains(out_segments, pattern[7])) {
+        result += 2 * (10 ** (NF - i))
+      }
+      else if (contains(out_segments, pattern[5])) {
+        result += 5 * (10 ** (NF - i))
+      }
+      else {
+        result += 3 * (10 ** (NF - i))
+      }
+      break
+    case 6:
+      if (!contains(out_segments, pattern[1])) {
+        result += 6 * (10 ** (NF - i))
+      }
+      if (!contains(out_segments, pattern[7])) {
+        result += 9 * (10 ** (NF - i))
+      }
+      break
     case 7:
       result += 8 * (10 ** (NF - i))
-      break
-    case /[56]/:
-      if (len == 5) {
-        if (contains(out_segments, pattern[7])) {
-          result += 2 * (10 ** (NF - i))
-        }
-        else if (contains(out_segments, pattern[5])) {
-          result += 5 * (10 ** (NF - i))
-        }
-        else {
-          result += 3 * (10 ** (NF - i))
-        }
-      }
-      if (len == 6) {
-        if (!contains(out_segments, pattern[1])) {
-          result += 6 * (10 ** (NF - i))
-        }
-        if (!contains(out_segments, pattern[7])) {
-          result += 9 * (10 ** (NF - i))
-        }
-      }
       break
     }
   }
