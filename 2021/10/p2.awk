@@ -22,9 +22,9 @@ BEGIN {
   }
   
   score = 0
-  for (i = sz; i >= 1; i--) {
+  for (; sz != 0; sz--) {
     score *= 5
-    switch (req[i]) {
+    switch (req[sz]) {
     case ">":
       score++
     case "}":

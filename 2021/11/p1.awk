@@ -29,8 +29,7 @@ END {
 }
 
 function flash(x, y,    i, j) {
-  octopus[x][y]++
-  if (octopus[x][y] != 10) return
+  if (octopus[x][y]++ != 9) return
   for (i = -1; i <= 1; i++) {
     for (j = -1; j <= 1; j++) {
       if ((i == 0 && j == 0) || x + i < 1 || x + i > NR || y + j < 1 || y + j > NF)
