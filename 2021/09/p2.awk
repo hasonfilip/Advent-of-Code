@@ -13,7 +13,7 @@ BEGIN {
 END {
   for (x = 1; x <= NR; x++) {
     for (y = 1; y <= NF; y++) {
-      if (map[x][y] >= 9) continue
+      if (map[x][y] == 9) continue
       results[++idx] = count(x, y)
     }
   }
@@ -32,13 +32,8 @@ END {
   print largest[1] * largest[2] * largest[3]
 }
 
-function count(x, y,    result) {
-  if (x < 1 || y < 1 || x > NR || y > NF || map[x][y] >= 9) return 0
-  map[x][y] = 10
-  result++
-  result += count(x - 1, y)
-  result += count(x + 1, y)
-  result += count(x, y - 1)
-  result += count(x, y + 1)
-  return result
+function count(x, y) {
+  if (x < 1 || y < 1 || x > NR || y > NF || map[x][y] == 9) return 0
+  map[x][y] = 9
+  return 1 + count(x - 1, y) + count(x + 1, y) + count(x, y - 1) + count(x, y + 1)
 }
