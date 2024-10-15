@@ -4,21 +4,6 @@ BEGIN {
     FS = "[,= ]"
 }
 
-function print_paper(    x, y, maxx, maxy) {
-  for (y in paper) {
-    for (x in paper[y]) {
-      if (int(x) > maxx) maxx = int(x)
-      if (int(y) > maxy) maxy = int(y)
-    }
-  }
-  for (y = 0; y <= maxy; y++) {
-    for (x = 0; x <= maxx; x++) {
-      printf "%s", paper[y][x] ? "#" : "."
-    }
-    print ""
-  }
-}
-
 /^[0-9]+/ {
   paper[int($2)][int($1)] = 1
 }
@@ -36,11 +21,10 @@ function print_paper(    x, y, maxx, maxy) {
       }  
     }
   }
-  if (!subsequent_folds) {
-    subsequent_folds++
+  if (!result) {
     for (y in paper) {
       for (x in paper[y]) {
-        result += paper[y][x]
+        result++
       }
     }
     print result
@@ -48,6 +32,17 @@ function print_paper(    x, y, maxx, maxy) {
 }
 
 END {
-  print_paper()
+  for (y in paper) {
+    if (int(y) > maxy) maxy = int(y)
+    for (x in paper[y]) {
+      if (int(x) > maxx) maxx = int(x)
+    }
+  }
+  for (y = 0; y <= maxy; y++) {
+    for (x = 0; x <= maxx; x++) {
+      printf "%s", paper[y][x] ? "#" : "."
+    }
+    print ""
+  }
 }
 
