@@ -1,4 +1,4 @@
-#!/usr/bin/awk -f
+#!/usr/bin/gawk -f
 
 BEGIN {
     FS = "[,= ]"
@@ -18,6 +18,8 @@ BEGIN {
       if ($3 == "y" && int(y) > int($4)) {
         paper[y-2*(y-$4)][x] = 1
         delete paper[y][x]
+        if (length(paper[y]) == 0)
+          delete paper[y]
       }  
     }
   }
@@ -33,10 +35,10 @@ BEGIN {
 
 END {
   for (y in paper) {
-    if (int(y) > maxy) maxy = int(y)
     for (x in paper[y]) {
       if (int(x) > maxx) maxx = int(x)
     }
+    if (int(y) > maxy) maxy = int(y)
   }
   for (y = 0; y <= maxy; y++) {
     for (x = 0; x <= maxx; x++) {
