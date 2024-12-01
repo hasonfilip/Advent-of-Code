@@ -1,7 +1,5 @@
 #!/usr/bin/gawk -f 
 
-BEGIN {FS = "   "} 
-
 {
   l[NR] = $1
   r[NR] = $2
