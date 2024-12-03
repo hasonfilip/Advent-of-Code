@@ -1,8 +1,7 @@
 #!/usr/bin/gawk -f 
 
 {
-  while(1) {
-    if (!match($0, /do\(\)|don't\(\)|mul\([0-9]+,[0-9]+\)/, arr)) break;
+  while(match($0, /do\(\)|don't\(\)|mul\([0-9]+,[0-9]+\)/, arr)) {
     $0 = substr($0, RSTART + RLENGTH)
     if (arr[0] == "do()") {
       dont = 0
