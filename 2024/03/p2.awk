@@ -14,7 +14,6 @@
   }
 }
 
-
 END {
   print result
 }
