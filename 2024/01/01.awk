@@ -15,5 +15,6 @@ END {
   for (i in l) {
     p2 += l[i] * occurances[l[i]]
   }
-  printf "Part 1: %d\nPart 2: %d\n", p1, p2
+  print "Part 1:", p1
+  print "Part 2:", p2
 }

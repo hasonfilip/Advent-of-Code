@@ -16,16 +16,7 @@ function check_dif(a, b) {
     next
   for (i = 1; i < NF; i++) {
     if (!check_dif($i, $(i+1))) {
-      if (fix || part1)
         safe = 0
-      else if (i + 2 > NF || check_dif($i, $(i+2)))
-        i++
-      else if (i > 1 && !check_dif($(i-1), $(i+1)))
-        safe = 0
-      if (!safe)
-        break
-      else
-        fix = 1
     }
   }
   if (safe)
