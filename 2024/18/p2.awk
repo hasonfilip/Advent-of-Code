@@ -1,10 +1,17 @@
 #!/usr/bin/gawk -f 
 
 BEGIN {
-  for (a = 1024; var != 999999; a++) {
-    exec("gawk -v bytes=" a " -f p1.awk input")
+  low = 1024 
+  high = exec("wc -l < input")
+  while (low < high) {
+    mid = int((low + high) / 2)
+    print mid
+    if (exec("gawk -v bytes=" mid " -f p1.awk input") == 999999)
+      high = mid
+    else
+      low = mid + 1
   }
-  print exec("gawk 'NR == " a - 1 " {print}' input")
+  print exec("gawk 'NR == " low " {print}' input")
 }
 
 function exec(cmd) {
