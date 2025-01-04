@@ -7,8 +7,8 @@
 }
 
 END {
-  print result_p1
-  print result_p2
+  print "Part 1: " result_p1
+  print "Part 2: " result_p2
 }
 
 function fuel(mass) {
